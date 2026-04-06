@@ -1,9 +1,11 @@
-let carrito = 0;
+function entrar() {
+    document.getElementById("inicio").style.display = "none";
+    document.getElementById("tienda").style.display = "block";
+}
 
-function Agregar(boton) {
-    boton.innerText = "Agregado 🛒";
-    boton.style.background = "green";
+let contador = 0;
 
-    carrito++;
-    document.getElementById("contador").innerText = carrito;
+function Agregar() {
+    contador++;
+    document.getElementById("contador").innerText = contador;
 }
