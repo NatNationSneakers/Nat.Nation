@@ -2,13 +2,13 @@
 body {
 
     font-family: Arial;
-    background: #720247;
-    color: white;
+    background: #0a0a0a;
+    color: rgb(247, 235, 247);
     text-align: center;
 }
 
 header {
-    background: rgb(252, 16, 123);
+    background: rgb(239, 235, 237);
     padding: 20px;
 }
 
@@ -101,4 +101,35 @@ button:hover {
 
 #tienda {
     display: none;
+    position: relative;
+}
+
+.logo-loader {
+    width: 300px; /* antes estaba chiquito */
+}
+
+#inicio h1 {
+    font-size: 70px;
+}
+
+#inicio p {
+    font-size: 25px;
+}
+
+#inicio button {
+    padding: 18px 40px;
+    font-size: 20px;
+}
+
+.btn-regresar {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background: #ff2e8b;
+    border: none;
+    padding: 10px 20px;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+    z-index: 10;
 }
