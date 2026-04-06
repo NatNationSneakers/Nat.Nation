@@ -5,7 +5,7 @@ function entrar() {
 
 let contador = 0;
 
-function Agregar() {
+function Agregar(btn) {
     contador++;
     document.getElementById("contador").innerText = contador;
 }
