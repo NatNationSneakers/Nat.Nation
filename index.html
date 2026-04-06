@@ -23,6 +23,14 @@
 <!-- 🔥 PANTALLA 2 (TIENDA) -->
 <div id="tienda">
 
+<div id="panel-carrito">
+    <button onclick="toggleCarrito()" class="btn-cerrar">
+    ⬅️ Regresar
+</button>
+
+    <h2> 🛒 Tu carrito</h2>
+    <ul id="lista-carrito"></ul>
+</div>
 
 <button class="btn-regresar" onclick="regresar()">⬅ Regresar</button>
 
@@ -30,8 +38,15 @@
         <h1>Bienvenido a Nat Nation</h1>
     </header>
 
-    <h2>🛒 Carrito: <span id="contador">0</span></h2>
-    <ul id="lista-carrito"><</ul>
+   <button id="btn-carrito" onclick="toggleCarrito()">
+
+<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="black">
+  <path d="M6 7V6a6 6 0 1 1 12 0v1h2a1 1 0 0 1 1 1l-1 12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2L3 8a1 1 0 0 1 1-1h2zm2 0h8V6a4 4 0 1 0-8 0v1z"/>
+</svg>
+
+<span id="contador">0</span>
+
+</button>
 
     <section class="productos">
 
@@ -47,7 +62,7 @@
   <option>MX 8</option>
 </select>
 
-<button onclick="Agregar(this)">Agregar</button>
+<button onclick="Agregar(this)">Añadir al carrito</button>
             
         </div>
 
@@ -63,7 +78,7 @@
   <option>MX 8</option>
 </select>
 
-<button onclick="Agregar(this)">Agregar</button>
+<button onclick="Agregar(this)">Añadir al carrito</button>
         </div>
 
         <div class="producto">
@@ -78,7 +93,7 @@
   <option>MX 8</option>
 </select>
 
-<button onclick="Agregar(this)">Agregar</button>
+<button onclick="Agregar(this)">Añadir al carrito</button>
         </div>
 
     </section>
