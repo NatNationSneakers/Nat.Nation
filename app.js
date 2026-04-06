@@ -40,3 +40,18 @@ function Agregar(boton) {
     carrito.push(producto + " - " + talla);
     actualizarCarrito();
 }
+
+
+window.onload = function () {
+    setTimeout(() => {
+        document.getElementById("loader").style.display = "none";
+        document.getElementById("contenido").style.display = "block";
+    }, 2000);
+};
+
+window.onload = function () {
+    setTimeout(() => {
+        document.getElementById("loader").classList.add("oculto");
+        document.getElementById("contenido").classList.add("visible");
+    }, 2000);
+};
