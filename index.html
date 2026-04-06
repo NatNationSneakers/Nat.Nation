@@ -6,47 +6,53 @@
 </head>
 <body>
    
-
- <section class="hero">
-    <h1>Nat.Nation Sneakers</h1>
+<!-- 🔥 PANTALLA 1 (INICIO) -->
+<div id="inicio">
+    <img src="logo.png" class="logo-loader">
+    <h1>Nat Nation</h1>
     <p>ENERGÍA · CONFORT · ESTILO</p>
-    <a href="#productos">
-      <button>EXPLORAR</button>
-    </a>
-</section>
+    <button onclick="entrar()">Entrar</button>
+</div>
 
-<section id="productos" class="productos">
+<!-- 🔥 PANTALLA 2 (TIENDA) -->
+<div id="tienda">
 
-<header>
-    <h1> Bienvenido a Nat Nation </h1>
-</header>
+    <header>
+        <h1>Bienvenido a Nat Nation</h1>
+    </header>
 
-<h2>🛒 Carrito: <span id="contador">0</span></h2>  
+    <h2>🛒 Carrito: <span id="contador">0</span></h2>
 
+    <section class="productos">
 
-    <div class="producto">
-        <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff">
-        <h2>Nike Air Max</h2>
-        <p>$2,500</p>
-       <button onclick="Agregar(this)">Agregar</button>
-    </div>
+        <div class="producto">
+            <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff">
+            <h2>Nike Air Max</h2>
+            <p>$2,500</p>
+            <button onclick="Agregar(this)">Agregar</button>
+        </div>
 
-    <div class="producto">
-        <img src="https://images.unsplash.com/photo-1600185365483-26d7a4cc7519">
-        <h2>Adidas Ultraboost</h2>
-        <p>$2,800</p>
-       <button onclick="Agregar(this)">Agregar</button>
-    </div>
+        <div class="producto">
+            <img src="https://images.unsplash.com/photo-1600185365483-26d7a4cc7519">
+            <h2>Adidas Ultraboost</h2>
+            <p>$2,800</p>
+            <button onclick="Agregar(this)">Agregar</button>
+        </div>
 
-    <div class="producto">
-        <img src="https://images.unsplash.com/photo-1519741497674-611481863552">
-        <h2>Puma RS-X</h2>
-        <p>$2,200</p>
-        <button onclick="Agregar(this)">Agregar</button>
-</section>
+        <div class="producto">
+            <img src="https://images.unsplash.com/photo-1519741497674-611481863552">
+            <h2>Puma RS-X</h2>
+            <p>$2,200</p>
+            <button onclick="Agregar(this)">Agregar</button>
+        </div>
+
+    </section>
+
+</div>
 
 <script src="app.js"></script>
 
 </body>
+</html>    
 
-</html> 
+ 
