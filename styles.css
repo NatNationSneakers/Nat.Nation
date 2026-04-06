@@ -1,0 +1,91 @@
+body {
+
+    font-family: Arial;
+    background: #720247;
+    color: white;
+    text-align: center;
+}
+
+header {
+    background: rgb(252, 16, 123);
+    padding: 20px;
+}
+
+.productos {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.producto {
+    background: #222;
+    padding: 20px;
+    border-radius: 10px;
+    width: 200px;
+}
+
+.producto img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+button {
+    background: rgb(220, 9, 171);
+    color: rgb(229, 207, 222);
+    border: none;
+    padding: 10px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+button:hover {
+    background: orange;
+    transform: scale(1.05);
+    transition: 0.3s;
+}
+
+.logo-loader{
+    width: 150px;
+    animation: zoom 2s ease;
+}
+
+@keyframes xoom {
+    0%{
+        transform: scale(0.5);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.producto:hover {
+    transform: translateY(-5px);
+    transition: 0.3s;
+}
+.hero {
+    height: 100vh;
+    background: linear-gradient(120deg, #720247, #720247, #720247);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: rgb(231, 221, 227);
+}
+
+.hero h1 {
+    font-size: 60px;
+    letter-spacing: 5px;
+}
+
+.hero button {
+    margin-top: 20px;
+    background: #0c0209;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 20px;
+    color: white;
+    cursor: pointer;
+}
+
