@@ -113,7 +113,7 @@ function Agregar(boton) {
 }
 
 function irAPagar() {
-    let mensaje = "🛍️ Hola, quiero hacer este pedido:\n\n";
+    let mensaje = "Hola!, quiero realizar este pedido:\n\n";
 
     let total = 0;
 
@@ -124,7 +124,7 @@ function irAPagar() {
     });
 
     mensaje += `\n💰 Total: $${total}`;
-    mensaje += `\n\n¿Me puedes apoyar con el pago? 🙏`;
+    mensaje += `\n\n¿Cómo puedo realizar el pago? 🙏`;
 
     let telefono = "5215624570336";
 
