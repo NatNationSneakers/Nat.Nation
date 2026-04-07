@@ -373,3 +373,18 @@ button:hover {
   cursor: pointer;
   color: black;
 }
+
+.promo-banner {
+    background: rgb(242, 19, 193);
+    color: rgb(251, 244, 248);
+    text-align: center;
+    padding: 10px;
+    cursor: pointer;
+    font-weight: bold;
+
+    margin-top: 60px; /* 👈 esto lo baja */
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 10px;
+}

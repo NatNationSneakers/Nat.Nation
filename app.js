@@ -132,3 +132,4 @@ function irAPagar() {
 
     window.open(url, "_blank");
 }
+
