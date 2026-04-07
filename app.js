@@ -111,3 +111,24 @@ function Agregar(boton) {
 
     agregarProducto(nombre, precio, imagen, talla);
 }
+
+function irAPagar() {
+    let mensaje = "🛍️ Hola, quiero hacer este pedido:\n\n";
+
+    let total = 0;
+
+    carrito.forEach(item => {
+        let subtotal = item.precio * item.cantidad;
+        mensaje += `• ${item.nombre} (${item.talla}) x${item.cantidad} - $${subtotal}\n`;
+        total += subtotal;
+    });
+
+    mensaje += `\n💰 Total: $${total}`;
+    mensaje += `\n\n¿Me puedes apoyar con el pago? 🙏`;
+
+    let telefono = "5215624570336";
+
+    let url = `https://wa.me/${telefono}?text=${encodeURIComponent(mensaje)}`;
+
+    window.open(url, "_blank");
+}
