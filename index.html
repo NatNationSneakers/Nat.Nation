@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Nat Nation Sneaker ! Tiemda de Tenis en México</title>
+    <title>Nat Nation Sneaker ! Tienda de Tenis en México</title>
     <meta name="description" content="Comptra tenis como Nike, Adidas, Puma entre otros en Nat.Nation Sneakers">
     <link rel="stylesheet" href="styles.css">
 </head>
@@ -31,6 +31,19 @@
 
     <h2> 🛒 Tu carrito</h2>
     <ul id="lista-carrito"></ul>
+    <div id="resumen">
+
+  <h3>RESUMEN DEL PEDIDO</h3>
+
+  <p>Productos: <span id="total-productos">0</span></p>
+  <p>Total: $<span id="total-precio">0</span></p>
+
+  <input type="text" id="cupon" placeholder="Código promocional">
+  <button onclick="aplicarCupon()">Aplicar</button>
+
+  <button id="btn-pagar">Ir a pagar →</button>
+
+</div>
 </div>
 
 <button class="btn-regresar" onclick="regresar()">⬅ Regresar</button>
@@ -69,7 +82,7 @@
 
         <div class="producto">
             <img src="Airforceblanco.png">
-            <h2>Air Force Blanco</h2>
+            <h2>Nike Air Force Blanco</h2>
             <p>$250</p>
             <select>
   <option>MX 23</option>
@@ -83,7 +96,7 @@
         </div>
 
         <div class="producto">
-            <img src="DC rojo.jpg">
+            <img src="DCNEGRO.jpg">
             <h2>DC Court Graffik SE</h2>
             <p>$350</p>
             <select>

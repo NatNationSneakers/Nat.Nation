@@ -23,40 +23,57 @@ let carrito = [];
 function actualizarCarrito() {
     let contador = document.getElementById("contador");
     let lista = document.getElementById("lista-carrito");
+    let totalElemento = document.getElementById("total-precio");
+    let productosElemento = document.getElementById("total-productos");
 
-    contador.innerText = carrito.length;
     lista.innerHTML = "";
 
+    let total = 0;
+    let totalProductos = 0;
+
     carrito.forEach((item, index) => {
+        total += item.precio * item.cantidad;
+        totalProductos += item.cantidad;
+
         lista.innerHTML += `
-   <li class="item-carrito">
-    
-    <div class="contenido-item">
-        <img src="${item.imagen}" class="img-carrito">
+        <li class="item-carrito">
+            <div class="contenido-item">
+                <img src="${item.imagen}" class="img-carrito">
 
-        <div class="info">
-            <p class="nombre">${item.nombre}</p>
-            <p class="talla">Talla: ${item.talla}</p>
-            <p class="precio">${item.precio}</p>
-           <div class="control-cantidad">
-    <button onclick="cambiarCantidad(${index}, -1)">➖</button>
-    <span>${item.cantidad}</span>
-    <button onclick="cambiarCantidad(${index}, 1)">➕</button>
-</div>
-        </div>
-    </div>
+                <div class="info">
+                    <p class="nombre">${item.nombre}</p>
+                    <p class="talla">Talla: ${item.talla}</p>
+                    <p class="precio">$${item.precio}</p>
+                </div>
+            </div>
 
-    <button class="btn-eliminar" onclick="eliminar(${index})">🗑️</button>
-
-</li>
-`;
+            <div class="acciones">
+                <button onclick="cambiarCantidad(${index}, -1)">-</button>
+                <span>${item.cantidad}</span>
+                <button onclick="cambiarCantidad(${index}, 1)">+</button>
+                <button class="btn-eliminar" onclick="eliminar(${index})">🗑️</button>
+            </div>
+        </li>
+        `;
     });
+
+    contador.innerText = totalProductos;
+    productosElemento.innerText = totalProductos;
+    totalElemento.innerText = total;
 }
 
-function eliminar(index) {
-    carrito.splice(index, 1);
+function agregarProducto(nombre, precio, imagen, talla) {
+    let productoExistente = carrito.find(p => p.nombre === nombre && p.talla === talla);
+
+    if (productoExistente) {
+        productoExistente.cantidad++;
+    } else {
+        carrito.push({ nombre, precio, imagen, talla, cantidad: 1 });
+    }
+
     actualizarCarrito();
 }
+
 function cambiarCantidad(index, cambio) {
     carrito[index].cantidad += cambio;
 
@@ -67,33 +84,10 @@ function cambiarCantidad(index, cambio) {
     actualizarCarrito();
 }
 
-function Agregar(boton) {
-    let card = boton.parentElement;
-    let producto = card.querySelector("h2").innerText;
-    let talla = card.querySelector("select").value;
-
-let precio = card.querySelector("p").innerText;
-let imagen = card.querySelector("img").src;
-
- let existente = carrito.find(item => 
-    item.nombre === producto && item.talla === talla
-);
-
-if (existente) {
-    existente.cantidad++;
-} else {
-    carrito.push({
-        nombre: producto,
-        talla: talla,
-        precio: precio,
-        imagen: imagen,
-        cantidad: 1
-    });
-}
-
+function eliminar(index) {
+    carrito.splice(index, 1);
     actualizarCarrito();
 }
-
 
 window.onload = function () {
     setTimeout(() => {
@@ -107,4 +101,13 @@ function toggleCarrito() {
     panel.classList.toggle("abierto");
 }
 
-li.innerHTML = producto + ' <button class="btn-eliminar" onclick="eliminar(this)">🗑️</button>';
+function Agregar(boton) {
+    let card = boton.parentElement;
+
+    let nombre = card.querySelector("h2").innerText;
+    let precio = parseFloat(card.querySelector("p").innerText.replace("$", ""));
+    let talla = card.querySelector("select").value;
+    let imagen = card.querySelector("img").src;
+
+    agregarProducto(nombre, precio, imagen, talla);
+}

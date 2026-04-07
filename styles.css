@@ -225,6 +225,8 @@ button:hover {
     padding-top: 80px;
     transition: right 0.4s ease;
     z-index: 2000;
+    overflow-y: auto;
+    box-sizing: border-box;
 }
 
 #panel-carrito.abierto {
@@ -254,21 +256,22 @@ button:hover {
 }
 
 .item-carrito {
-    display: flex;
-    align-items: center;
-    position: relative;
-    padding-right:  40px;
-    border-bottom: 1px solid #ddd;
+  list-style: none;
+  border-bottom: 1px solid #ddd;
+  padding: 15px 0;
+}
 
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 }
 
 .contenido-item {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    flex: 1;
+  display: flex;
+  gap: 15px;
+  align-items: center;
 }
-
 .img-carrito {
     width: 100px;
     height: 100px;
@@ -279,13 +282,14 @@ button:hover {
 .info {
     display: flex;
     flex-direction: column;
-    gap: 4xp;
+    gap: 5xp;
 }
 
 .nombre {
     font-weight: bold;
-    font-size: 18px;
-    white-space: nowrap;
+    word-break: break-word;
+    max-width: 180px;
+    
 }
 
 .talla {
@@ -296,18 +300,16 @@ button:hover {
 .precio {
     font-size: 18px;
     font-weight: bold;
+    display: block;
 }
 
 .btn-eliminar {
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-
     background: transparent;
     border: none;
     font-size: 20px;
     cursor: pointer;
+    margin-left: 15px;
+
 }
 
 .cantidad {
@@ -318,8 +320,8 @@ button:hover {
 /* CONTENEDOR DE + Y - */
 .control-cantidad {
     display: flex;
-    align-items: center;
     gap: 10px;
+    align-items: center;
     margin-top: 10px;
 }
 
@@ -328,10 +330,10 @@ button:hover {
     background: #f0f0f0;
     border: none;
     padding: 6px 12px;
-    font-size: 16px;
+    font-size: 18px;
     border-radius: 6px;
     cursor: pointer;
-    transition: 0.2s;
+    color: black;
 }
 
 /* EFECTO HOVER */
@@ -346,4 +348,28 @@ button:hover {
     font-size: 16px;
     min-width: 20px;
     text-align: center;
+}
+
+.acciones {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.acciones span {
+  display: inline-block;
+  min-width: 20px;
+  text-align: center;
+  font-weight: bold;
+}
+.acciones button {
+  background: #f0f0f0;
+  border: none;
+  padding: 5px 10px;
+  font-size: 18px;
+  border-radius: 5px;
+  cursor: pointer;
+  color: black;
 }
