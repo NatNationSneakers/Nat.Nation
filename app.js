@@ -1,16 +1,13 @@
 function entrar() {
     const contenido = document.getElementById("contenido");
 
-    // 🔥 activa el zoom
     contenido.classList.add("zoom-out");
 
     setTimeout(() => {
         document.getElementById("inicio").style.display = "none";
         document.getElementById("tienda").style.display = "block";
-
-        // 🔄 quitamos zoom para la siguiente vez
         contenido.classList.remove("zoom-out");
-    }, 300); // ⏱ mismo tiempo que tu CSS
+    }, 300);
 }
 
 function regresar() {
@@ -39,7 +36,6 @@ function actualizarCarrito() {
         <li class="item-carrito">
             <div class="contenido-item">
                 <img src="${item.imagen}" class="img-carrito">
-
                 <div class="info">
                     <p class="nombre">${item.nombre}</p>
                     <p class="talla">Talla: ${item.talla}</p>
@@ -113,105 +109,71 @@ function Agregar(boton) {
 }
 
 function irAPagar() {
-    let mensaje = "Hola!, quiero realizar este pedido:\n\n";
+  let correo = localStorage.getItem("correo");
 
-    let total = 0;
+  if (!correo) {
+    alert("Primero regístrate");
+    return;
+  }
 
-    carrito.forEach(item => {
-        let subtotal = item.precio * item.cantidad;
-        mensaje += `• ${item.nombre} (${item.talla}) x${item.cantidad} - $${subtotal}\n`;
-        total += subtotal;
-    });
+  let mensaje = "Hola!, quiero realizar este pedido:\n\n";
 
-    mensaje += `\n💰 Total: $${total}`;
-    mensaje += `\n\n¿Cómo puedo realizar el pago? 🙏`;
+  let total = 0;
 
-    let telefono = "5215624570336";
+  carrito.forEach(item => {
+    let subtotal = item.precio * item.cantidad;
+    mensaje += `• ${item.nombre} (${item.talla}) x${item.cantidad} - $${subtotal}\n`;
+    total += subtotal;
+  });
 
-    let url = `https://wa.me/${telefono}?text=${encodeURIComponent(mensaje)}`;
+  mensaje += `\n💰 Total: $${total}`;
+  mensaje += `\n\n¿Cómo puedo realizar el pago? 🙏`;
 
-    window.open(url, "_blank");
+  let telefono = "5215624570336";
+  let url = `https://wa.me/${telefono}?text=${encodeURIComponent(mensaje)}`;
+
+  fetch("http://127.0.0.1:5016/comprar", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded"
+    },
+    body: "correo=" + correo
+  })
+  .then(() => {
+    window.location.href = url;
+  });
 }
 
 function animarBanner() {
     let banner = document.getElementById("promoBanner");
 
-    // esperar antes de ocultar
     setTimeout(() => {
-
         setInterval(() => {
-
-            // ocultar
             banner.classList.add("oculto");
 
-            // mostrar después de 10s
             setTimeout(() => {
                 banner.classList.remove("oculto");
             }, 10000);
 
-        }, 20000); // ciclo completo
+        }, 20000);
 
-    }, 8000); // 🔥 tiempo visible al inicio (8 segundos)
+    }, 8000);
 }
 
 window.addEventListener("load", function () {
     animarBanner();
 });
 
-function registrar() {
-    let email = document.getElementById("email").value;
-    let password = document.getElementById("password").value;
-
-    if (!email || !password) {
-        alert("Completa todos los campos");
-        return;
-    }
-
-    fetch("http://127.0.0.1:5002/registro", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            email: email,
-            password: password
-        })
-    })
-    .then(res => res.json())
-    .then(data => {
-        alert("Cuenta creada 🎉");
-    })
-    .catch(error => {
-        console.error("Error:", error);
-        alert("Error al registrar");
-    });
-}
-
-function toggleRegistro() {
-    const reg = document.getElementById("registro");
-
-    if (reg.style.display === "none" || reg.style.display === "") {
-        reg.style.display = "block";
-    } else {
-        reg.style.display = "none";
-    }
-}
-
 function toggleUser() {
     const panel = document.getElementById("panel-user");
     panel.classList.toggle("activo");
 }
 
-function toggleRegistro() {
-    let panel = document.getElementById("registro");
-    panel.classList.toggle("abierto");
-}
-
 function abrirPromo() {
-    window.location.href = "http://127.0.0.1:5015/descuento";
+   window.location.href = "http://127.0.0.1:5016/descuento";
 }
 
-  function aplicarCupon() {
+function aplicarCupon() {
   let codigo = document.getElementById("cupon").value.trim().toUpperCase();
   let correo = localStorage.getItem("correo");
 
@@ -220,18 +182,12 @@ function abrirPromo() {
     return;
   }
 
- alert("Correo que se está usando: " + correo); // 👈 AQUÍ
-
- console.log("Correo enviado:", correo);
- console.log("Código enviado:", codigo);
-
-
-  fetch("http://127.0.0.1:5015/validar_cupon", {
+  fetch("http://127.0.0.1:5016/validar_cupon", {
     method: "POST",
     headers: {
       "Content-Type": "application/x-www-form-urlencoded"
     },
-   body: "correo=" + encodeURIComponent(correo) + "&codigo=" + encodeURIComponent(codigo)
+    body: "correo=" + encodeURIComponent(correo) + "&codigo=" + encodeURIComponent(codigo)
   })
   .then(res => res.text())
   .then(data => {
@@ -248,23 +204,10 @@ function abrirPromo() {
     else if (data === "YA_USADO") {
       alert("⚠️ Ya usaste este cupón");
     } 
-    else if (data == "NO EXISTE") {
-        alert("❌ Cupón inválido");
-    }
     else {
-      alert("❌ Error desconocido" + data);
+      alert("❌ Cupón inválido");
     }
-  })
-.catch(error => {
-  console.error("ERROR:", error);
-  alert("❌ Error con el servidor");
-});
-}
-
-
-function guardarCorreo() {
-  let correo = document.getElementById("correoInput").value;
-  localStorage.setItem("correo", correo);
+  });
 }
 
 function registrarUsuario() {
@@ -276,11 +219,9 @@ function registrarUsuario() {
     return;
   }
 
-  // 🔥 GUARDA EL CORREO (CLAVE)
   localStorage.setItem("correo", correo);
 
-  // 🔥 ENVÍA A FLASK
-  fetch("http://127.0.0.1:5015/registro_usuario", {
+  fetch("http://127.0.0.1:5016/registro_usuario", {
     method: "POST",
     headers: {
       "Content-Type": "application/x-www-form-urlencoded"
@@ -288,27 +229,10 @@ function registrarUsuario() {
     body: "correo=" + correo + "&password=" + password
   })
   .then(res => res.text())
-  .then(data => {
+  .then(() => {
     alert("✅ Registrado");
   });
 }
-
-function guardarCorreo() {
-  let correo = document.getElementById("correoInput").value;
-
-  // 🔥 FORZAMOS que se guarde ANTES de enviar
-  localStorage.setItem("correo", correo);
-
-  console.log("Guardado:", correo); // para ver si sí guarda
-
-  return true; // 🔥 IMPORTANTE
-}
-
-function abrirPanel() {
-    document.getElementById("panel-user").classList.add("activo");
-    document.getElementById("overlay").classList.add("activo");
-}
-
 
 function mostrarUsuario(correo) {
     let panel = document.getElementById("panel-user");
@@ -328,3 +252,46 @@ function cerrarSesion() {
     location.reload();
 }
 
+window.addEventListener("load", function () {
+
+  setTimeout(() => {
+    document.getElementById("loader").classList.add("oculto");
+    document.getElementById("contenido").classList.add("visible");
+  }, 800);
+
+  let correo = localStorage.getItem("correo");
+  let input = document.getElementById("correoInput");
+
+  if (correo && input) {
+    input.value = correo;
+  }
+
+});
+
+function abrirLoginFull() {
+    document.getElementById("login-full").classList.add("activo");
+}
+
+function cerrarLoginFull() {
+    document.getElementById("login-full").classList.remove("activo");
+}
+
+window.addEventListener("load", function () {
+
+    document.querySelector(".fb").addEventListener("click", () => {
+        alert("Login con Facebook próximamente 🔥");
+    });
+
+    document.querySelector(".apple").addEventListener("click", () => {
+        alert("Login con Apple próximamente 🍏");
+    });
+
+    document.querySelector(".google").addEventListener("click", () => {
+        alert("Login con Google próximamente 🌎");
+    });
+
+});
+
+function mostrarRegistro() {
+    alert("Aquí puedes crear tu cuenta 🔥");
+}

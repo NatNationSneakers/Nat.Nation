@@ -4,6 +4,8 @@
     <title>Nat Nation Sneaker ! Tienda de Tenis en México</title>
     <meta name="description" content="Comptra tenis como Nike, Adidas, Puma entre otros en Nat.Nation Sneakers">
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
 </head>
 <body>
    
@@ -24,7 +26,7 @@
     <h1>Nat Nation</h1>
     <p>ENERGÍA · CONFORT · ESTILO</p>
     <button onclick="entrar()">Entrar</button>
-    <div id="user-icon" onclick="toggleUser()">👤</div>
+    <div id="user-icon" onclick="abrirLoginFull()">👤</div>
 </div>
 
 
@@ -60,7 +62,7 @@
     </header>
 
    <div id="iconos-top">
-    <div id="user-icon" onclick="toggleUser()">👤</div>
+    <div id="user-icon" onclick="abrirLoginFull()">👤</div>
     <button id="btn-carrito" onclick="toggleCarrito()">
         🛍️ <span id="contador">0</span>
     </button>
@@ -130,6 +132,13 @@
 
   <h2>Tu cuenta</h2>
 
+<!-- 🔥 AQUI VA EXACTO -->
+<div class="social-login">
+    <button class="social-btn fb">📘</button>
+    <button class="social-btn apple"></button>
+    <button class="social-btn google">🌐</button>
+</div>
+
   <input type="email" id="correoInput" placeholder="Correo"><br>
   <input type="password" id="passwordInput" placeholder="Contraseña"><br>
 
@@ -137,8 +146,82 @@
 
 </div>
 
+<script>
+function registrarUsuario() {
+  let correo = document.getElementById("correoInput").value;
+  let password = document.getElementById("passwordInput").value;
+
+  if (!correo || !password) {
+    alert("Llena todos los campos");
+    return;
+  }
+
+  // 🔥 GUARDAR SESIÓN
+  localStorage.setItem("correo", correo);
+
+  // 🔥 ENVIAR A FLASK
+  fetch("http://127.0.0.1:5016/guardar_correo", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded"
+    },
+    body: "correo=" + correo
+  })
+  .then(res => res.text())
+  .then(data => {
+    alert("Cuenta creada");
+  });
+}
+</script>
+
+<script>
+window.onload = function() {
+  let correo = localStorage.getItem("correo");
+
+  if (correo) {
+    document.getElementById("correoInput").value = correo;
+    console.log("Usuario detectado:", correo);
+  }
+};
+</script>
+
+<div id="login-full">
+
+    <button onclick="cerrarLoginFull()" class="cerrar-login">✖</button>
+
+   <div class="login-contenido">
+    <h1>Inicia sesión o regístrate</h1>
+
+    <!-- 🔥 AQUÍ VA -->
+    <div class="social-login">
+    <button class="social-btn">
+    <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png">
+</button>
+
+<button class="social-btn">
+    <img src="https://cdn-icons-png.flaticon.com/512/0/747.png">
+</button>
+
+<button class="social-btn">
+    <img src="https://cdn-icons-png.flaticon.com/512/300/300221.png">
+</button>
+</div>
+
+    <input type="email" id="correoLogin" placeholder="Correo electrónico">
+    <input type="password" id="passLogin" placeholder="Contraseña">
+
+    <button onclick="registrarUsuario()">CONTINUAR →</button>
+    <p class="crear-cuebta-texto;">¿No tienes cuenta?</p>
+<button class="btn-crear" onclick="mostrarRegistro()">
+    Crear cuenta
+</button>
+
+</div>
+
+
+</div>
+
 <script src="app.js"></script>
 
 </body>
 </html>    
-
