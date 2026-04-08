@@ -124,10 +124,10 @@ cursor.execute("CREATE TABLE IF NOT EXISTS usuarios (correo TEXT, password TEXT,
     existe = cursor.fetchone()
 
     if existe:
-        mensaje = "⚠️ Este correo ya está registrado"
+        mensaje = " Este correo ya está registrado"
     else:
         cursor.execute("INSERT INTO usuarios (correo, password, uso_cupon) VALUES (?,?,?)", (correo, "", 0))
-        mensaje = "✅ Correo guardado correctamente"
+        mensaje = " Correo guardado correctamente"
 
     conn.commit()
     conn.close()
