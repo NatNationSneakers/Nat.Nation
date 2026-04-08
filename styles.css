@@ -472,24 +472,21 @@ button:hover {
 
 #panel-user {
     position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(0);
-
+    top: 0%;
+    right: -320px;
     background: #111;
-    padding: 30px;
+    padding: 20px;
     border-radius: 15px;
     width: 300px;
-
+    height: 100%;
     z-index: 9999;
     color: white;
-
     transition: 0.3s;
 }
 
 /* cuando se abre */
 #panel-user.activo {
-    transform: translate(-50%, -50%) scale(1);
+   right: 0;
 }
 
 .panel-login {
@@ -539,4 +536,25 @@ button:hover {
 
 #inicio #user-icon {
     display: none;
+}
+
+#overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    background: rgba(0,0,0,0.6);
+
+    opacity: 0;
+    pointer-events: none;
+
+    transition: 0.3s;
+    z-index: 9998;
+}
+
+#overlay.activo {
+    opacity: 1;
+    pointer-events: none; /* 🔥 CAMBIA ESTO */
 }

@@ -24,18 +24,9 @@
     <h1>Nat Nation</h1>
     <p>ENERGÍA · CONFORT · ESTILO</p>
     <button onclick="entrar()">Entrar</button>
-    <div id="user-icon" onclick="toggleRegistro()">👤</div>
+    <div id="user-icon" onclick="toggleUser()">👤</div>
 </div>
 
-<div  id="registro" class="panel-login ">
-    <button onclick="toggleRegistro()" class="btn-cerrar">⬅ Regresar</button>
-  <h3>Crear cuenta</h3>
-
-  <input type="email" id="email" placeholder="Correo"><br>
-  <input type="password" id="password" placeholder="Contraseña"><br>
-
-  <button onclick="registrar()">Registrarse</button>
-</div>
 
 <!-- 🔥 PANTALLA 2 (TIENDA) -->
 <div id="tienda">
@@ -69,7 +60,7 @@
     </header>
 
    <div id="iconos-top">
-    <div id="user-icon" onclick="toggleRegistro()">👤</div>
+    <div id="user-icon" onclick="toggleUser()">👤</div>
     <button id="btn-carrito" onclick="toggleCarrito()">
         🛍️ <span id="contador">0</span>
     </button>
@@ -129,21 +120,20 @@
 
 </div>
 
+<!-- FONDO OSCURO -->
+<div id="overlay" onclick="toggleUser()"></div>
+
+<!-- PANEL USUARIO -->
 <div id="panel-user">
 
-    <button onclick="toggleUser()">✖</button>
+  <button class="btn-cerrar" onclick="toggleUser()">X</button>
 
-    <h2>Tu cuenta</h2>
+  <h2>Tu cuenta</h2>
 
-   <form action="http://127.0.0.1:50011/registro_usuario" method="POST">
+  <input type="email" id="correoInput" placeholder="Correo"><br>
+  <input type="password" id="passwordInput" placeholder="Contraseña"><br>
 
-  <input type="email" name="correo" placeholder="Correo" required><br>
-
-  <input type="password" name="password" placeholder="Contraseña" required><br>
-
-  <button type="submit">Registrarse</button>
-
-</form>
+  <button onclick="registrarUsuario()">Registrarse</button>
 
 </div>
 

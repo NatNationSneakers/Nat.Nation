@@ -208,22 +208,123 @@ function toggleRegistro() {
 }
 
 function abrirPromo() {
-    window.location.href = "http://127.0.0.1:5011/descuento";
+    window.location.href = "http://127.0.0.1:5015/descuento";
 }
 
-function aplicarCupon() {
-  let codigo = document.getElementById("cupon").value;
-  let totalElemento = document.getElementById("total-precio");
+  function aplicarCupon() {
+  let codigo = document.getElementById("cupon").value.trim().toUpperCase();
+  let correo = localStorage.getItem("correo");
 
-  let total = parseFloat(totalElemento.innerText);
-
-  if (codigo === "BIENVENIDO10") {
-    let nuevoTotal = total * 0.90;
-
-    totalElemento.innerText = nuevoTotal.toFixed(2);
-
-    alert("🎉 Descuento aplicado!");
-  } else {
-    alert("❌ Cupón inválido");
+  if (!correo) {
+    alert("⚠️ Debes registrarte primero");
+    return;
   }
+
+ alert("Correo que se está usando: " + correo); // 👈 AQUÍ
+
+ console.log("Correo enviado:", correo);
+ console.log("Código enviado:", codigo);
+
+
+  fetch("http://127.0.0.1:5015/validar_cupon", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded"
+    },
+   body: "correo=" + encodeURIComponent(correo) + "&codigo=" + encodeURIComponent(codigo)
+  })
+  .then(res => res.text())
+  .then(data => {
+
+    if (data === "OK") {
+      let totalElemento = document.getElementById("total-precio");
+      let total = parseFloat(totalElemento.innerText) || 0;
+
+      let nuevoTotal = total * 0.90;
+      totalElemento.innerText = nuevoTotal.toFixed(2);
+
+      alert("🎉 Descuento aplicado");
+    } 
+    else if (data === "YA_USADO") {
+      alert("⚠️ Ya usaste este cupón");
+    } 
+    else if (data == "NO EXISTE") {
+        alert("❌ Cupón inválido");
+    }
+    else {
+      alert("❌ Error desconocido" + data);
+    }
+  })
+.catch(error => {
+  console.error("ERROR:", error);
+  alert("❌ Error con el servidor");
+});
 }
+
+
+function guardarCorreo() {
+  let correo = document.getElementById("correoInput").value;
+  localStorage.setItem("correo", correo);
+}
+
+function registrarUsuario() {
+  let correo = document.getElementById("correoInput").value;
+  let password = document.getElementById("passwordInput").value;
+
+  if (!correo || !password) {
+    alert("⚠️ Llena todos los campos");
+    return;
+  }
+
+  // 🔥 GUARDA EL CORREO (CLAVE)
+  localStorage.setItem("correo", correo);
+
+  // 🔥 ENVÍA A FLASK
+  fetch("http://127.0.0.1:5015/registro_usuario", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded"
+    },
+    body: "correo=" + correo + "&password=" + password
+  })
+  .then(res => res.text())
+  .then(data => {
+    alert("✅ Registrado");
+  });
+}
+
+function guardarCorreo() {
+  let correo = document.getElementById("correoInput").value;
+
+  // 🔥 FORZAMOS que se guarde ANTES de enviar
+  localStorage.setItem("correo", correo);
+
+  console.log("Guardado:", correo); // para ver si sí guarda
+
+  return true; // 🔥 IMPORTANTE
+}
+
+function abrirPanel() {
+    document.getElementById("panel-user").classList.add("activo");
+    document.getElementById("overlay").classList.add("activo");
+}
+
+
+function mostrarUsuario(correo) {
+    let panel = document.getElementById("panel-user");
+
+    panel.innerHTML = `
+        <h3>👤 Bienvenido</h3>
+        <p>${correo}</p>
+        <button onclick="cerrarSesion()">Cerrar sesión</button>
+    `;
+
+    panel.classList.add("activo");
+    document.getElementById("overlay").classList.add("activo");
+}
+
+function cerrarSesion() {
+    localStorage.removeItem("correo");
+    location.reload();
+}
+
