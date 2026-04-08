@@ -15,7 +15,7 @@ function regresar() {
     document.getElementById("inicio").style.display = "flex";
 }
 
-let carrito = [];
+let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 
 function actualizarCarrito() {
     let contador = document.getElementById("contador");
@@ -173,6 +173,184 @@ function abrirPromo() {
    window.location.href = "http://127.0.0.1:5016/descuento";
 }
 
+function entrar() {
+    const contenido = document.getElementById("contenido");
+
+    contenido.classList.add("zoom-out");
+
+    setTimeout(() => {
+        document.getElementById("inicio").style.display = "none";
+        document.getElementById("tienda").style.display = "block";
+        contenido.classList.remove("zoom-out");
+    }, 300);
+}
+
+function regresar() {
+    document.getElementById("tienda").style.display = "none";
+    document.getElementById("inicio").style.display = "flex";
+}
+
+
+function actualizarCarrito() {
+    let contador = document.getElementById("contador");
+    let lista = document.getElementById("lista-carrito");
+    let totalElemento = document.getElementById("total-precio");
+    let productosElemento = document.getElementById("total-productos");
+
+    lista.innerHTML = "";
+
+    let total = 0;
+    let totalProductos = 0;
+
+    carrito.forEach((item, index) => {
+        total += item.precio * item.cantidad;
+        totalProductos += item.cantidad;
+
+        lista.innerHTML += `
+        <li class="item-carrito">
+            <div class="contenido-item">
+                <img src="${item.imagen}" class="img-carrito">
+                <div class="info">
+                    <p class="nombre">${item.nombre}</p>
+                    <p class="talla">Talla: ${item.talla}</p>
+                    <p class="precio">$${item.precio}</p>
+                </div>
+            </div>
+
+            <div class="acciones">
+                <button onclick="cambiarCantidad(${index}, -1)">-</button>
+                <span>${item.cantidad}</span>
+                <button onclick="cambiarCantidad(${index}, 1)">+</button>
+                <button class="btn-eliminar" onclick="eliminar(${index})">🗑️</button>
+            </div>
+        </li>
+        `;
+    });
+
+    contador.innerText = totalProductos;
+    productosElemento.innerText = totalProductos;
+    totalElemento.innerText = total;
+    localStorage.setItem("carrito", JSON.stringify(carrito));
+}
+
+function agregarProducto(nombre, precio, imagen, talla) {
+    let productoExistente = carrito.find(p => p.nombre === nombre && p.talla === talla);
+
+    if (productoExistente) {
+        productoExistente.cantidad++;
+    } else {
+        carrito.push({ nombre, precio, imagen, talla, cantidad: 1 });
+    }
+
+    actualizarCarrito();
+}
+
+function cambiarCantidad(index, cambio) {
+    carrito[index].cantidad += cambio;
+
+    if (carrito[index].cantidad <= 0) {
+        carrito.splice(index, 1);
+    }
+
+    actualizarCarrito();
+}
+
+function eliminar(index) {
+    carrito.splice(index, 1);
+    actualizarCarrito();
+}
+
+window.onload = function () {
+    setTimeout(() => {
+        document.getElementById("loader").classList.add("oculto");
+        document.getElementById("contenido").classList.add("visible");
+    }, 800);
+};
+
+function toggleCarrito() {
+    let panel = document.getElementById("panel-carrito");
+    panel.classList.toggle("abierto");
+}
+
+function Agregar(boton) {
+    let card = boton.parentElement;
+
+    let nombre = card.querySelector("h2").innerText;
+    let precio = parseFloat(card.querySelector("p").innerText.replace("$", ""));
+    let talla = card.querySelector("select").value;
+    let imagen = card.querySelector("img").src;
+
+    agregarProducto(nombre, precio, imagen, talla);
+}
+
+function irAPagar() {
+  let correo = localStorage.getItem("correo");
+  let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+
+  if (!correo) {
+    alert("Primero regístrate");
+    return;
+  }
+
+  let mensaje = "Hola!, quiero realizar este pedido:\n\n";
+
+  let total = 0;
+
+  carrito.forEach(item => {
+    let subtotal = item.precio * item.cantidad;
+    mensaje += `• ${item.nombre} (${item.talla}) x${item.cantidad} - $${subtotal}\n`;
+    total += subtotal;
+  });
+
+  mensaje += `\n💰 Total: $${total}`;
+  mensaje += `\n\n¿Cómo puedo realizar el pago? 🙏`;
+
+  let telefono = "5215624570336";
+  let url = `https://wa.me/${telefono}?text=${encodeURIComponent(mensaje)}`;
+
+  fetch("http://127.0.0.1:5016/comprar", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded"
+    },
+    body: "correo=" + correo
+  })
+  .then(() => {
+    localStorage.removeItem("carrito");
+    carrito = [];
+    window.location.href = url;
+});
+}
+
+function animarBanner() {
+    let banner = document.getElementById("promoBanner");
+
+    setTimeout(() => {
+        setInterval(() => {
+            banner.classList.add("oculto");
+
+            setTimeout(() => {
+                banner.classList.remove("oculto");
+            }, 10000);
+
+        }, 20000);
+
+    }, 8000);
+}
+
+window.addEventListener("load", function () {
+    animarBanner();
+});
+
+function toggleUser() {
+    const panel = document.getElementById("panel-user");
+    panel.classList.toggle("activo");
+}
+
+function abrirPromo() {
+   window.location.href = "http://127.0.0.1:5016/descuento";
+}
+
 function aplicarCupon() {
   let codigo = document.getElementById("cupon").value.trim().toUpperCase();
   let correo = localStorage.getItem("correo");
@@ -296,55 +474,97 @@ function mostrarRegistro() {
     alert("Aquí puedes crear tu cuenta 🔥");
 }
 
-function irAPagar() {
 
-    let productos = document.getElementById("total-productos").innerText;
-    let total = document.getElementById("total-precio").innerText;
 
-    let mensaje = "Hola, quiero comprar:\n";
-    mensaje += "🛒 Productos: " + productos + "\n";
-    mensaje += "💰 Total: $" + total;
 
-    let numero = "525624570336"; // 🔥 TU NÚMERO (con lada MX)
 
-    let url = "https://wa.me/" + numero + "?text=" + encodeURIComponent(mensaje);
+function registrarUsuario() {
+  let correo = document.getElementById("correoInput").value;
+  let password = document.getElementById("passwordInput").value;
 
-    window.open(url, "_blank");
+  if (!correo || !password) {
+    alert("⚠️ Llena todos los campos");
+    return;
+  }
+
+  localStorage.setItem("correo", correo);
+
+  fetch("http://127.0.0.1:5016/registro_usuario", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded"
+    },
+    body: "correo=" + correo + "&password=" + password
+  })
+  .then(res => res.text())
+  .then(() => {
+    alert("✅ Registrado");
+  });
 }
 
-function aplicarCupon() {
+function mostrarUsuario(correo) {
+    let panel = document.getElementById("panel-user");
 
-    let codigo = document.getElementById("cupon").value.trim().toUpperCase();
-    let total = parseFloat(document.getElementById("total-precio").innerText);
+    panel.innerHTML = `
+        <h3>👤 Bienvenido</h3>
+        <p>${correo}</p>
+        <button onclick="cerrarSesion()">Cerrar sesión</button>
+    `;
 
-    // ❌ si ya lo usó
-    if (localStorage.getItem("cuponUsado")) {
-        alert("Ya usaste el cupón ❌");
-        return;
-    }
-
-    // ❌ si está vacío
-    if (codigo === "") {
-        alert("Ingresa un cupón ❌");
-        return;
-    }
-
-    // ❌ si no hay productos
-    if (!total || total === 0) {
-        alert("No hay productos en el carrito ❌");
-        return;
-    }
-
-    // ✅ cupón correcto
-    if (codigo === "BIENVENIDO10") {
-        let nuevoTotal = total * 0.9;
-
-        document.getElementById("total-precio").innerText = nuevoTotal.toFixed(2);
-
-        localStorage.setItem("cuponUsado", true);
-
-        alert("Cupón aplicado 🔥 10% OFF");
-    } else {
-        alert("Cupón inválido ❌");
-    }
+    panel.classList.add("activo");
+    document.getElementById("overlay").classList.add("activo");
 }
+
+function cerrarSesion() {
+    localStorage.removeItem("correo");
+    location.reload();
+}
+
+window.addEventListener("load", function () {
+
+  setTimeout(() => {
+    document.getElementById("loader").classList.add("oculto");
+    document.getElementById("contenido").classList.add("visible");
+  }, 800);
+
+  let correo = localStorage.getItem("correo");
+  let input = document.getElementById("correoInput");
+
+  if (correo && input) {
+    input.value = correo;
+  }
+
+});
+
+function abrirLoginFull() {
+    document.getElementById("login-full").classList.add("activo");
+}
+
+function cerrarLoginFull() {
+    document.getElementById("login-full").classList.remove("activo");
+}
+
+window.addEventListener("load", function () {
+
+    document.querySelector(".fb").addEventListener("click", () => {
+        alert("Login con Facebook próximamente 🔥");
+    });
+
+    document.querySelector(".apple").addEventListener("click", () => {
+        alert("Login con Apple próximamente 🍏");
+    });
+
+    document.querySelector(".google").addEventListener("click", () => {
+        alert("Login con Google próximamente 🌎");
+    });
+
+});
+
+function mostrarRegistro() {
+    alert("Aquí puedes crear tu cuenta 🔥");
+}
+
+
+
+
+
