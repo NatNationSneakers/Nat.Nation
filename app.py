@@ -43,10 +43,10 @@ def inicio():
     </style>
 
     <div class="contenedor">
-            <h1>Nat Nation Sneakers</h1>
-            <p>Bienvenido a mi tienda</p>
+        <h1>Nat Nation Sneakers</h1>
+        <p>Bienvenido a mi tienda</p>
 
-             <div class="caja">
+        <div class="caja">
             <a href="/descuento">
                 <button>🎁 Obtener 10% de descuento</button>
             </a>
@@ -67,7 +67,7 @@ def descuento():
         color: white;
     }
 
-  .contenedor {
+    .contenedor {
         margin-top: 100px;
     }
 
@@ -111,6 +111,7 @@ def descuento():
     </div>
     """
 
+
 # 👉 Guardar correo
 @app.route("/guardar_correo", methods=["POST"])
 def guardar_correo():
@@ -118,21 +119,21 @@ def guardar_correo():
 
     conn = sqlite3.connect("tienda.db")
     cursor = conn.cursor()
-cursor.execute("CREATE TABLE IF NOT EXISTS usuarios (correo TEXT, password TEXT, uso_cupon INTEGER)")
 
+    cursor.execute("CREATE TABLE IF NOT EXISTS usuarios (correo TEXT, password TEXT, uso_cupon INTEGER)")
     cursor.execute("SELECT * FROM usuarios WHERE correo = ?", (correo,))
     existe = cursor.fetchone()
 
     if existe:
-        mensaje = " Este correo ya está registrado"
+        mensaje = "⚠️ Este correo ya está registrado"
     else:
         cursor.execute("INSERT INTO usuarios (correo, password, uso_cupon) VALUES (?,?,?)", (correo, "", 0))
-        mensaje = " Correo guardado correctamente"
+        mensaje = "✅ Correo guardado correctamente"
 
     conn.commit()
     conn.close()
 
-    return f""" 
+    return f"""
     <style>
     body {{
         background: linear-gradient(135deg, #ff4da6, #ff80bf);
@@ -146,19 +147,21 @@ cursor.execute("CREATE TABLE IF NOT EXISTS usuarios (correo TEXT, password TEXT,
         <div class="caja">
             <h3>🎉 Tu código es: BIENVENIDO10</h3>
             <p>{mensaje}</p>
-          <a href="https://natnation-sneakers.onrender.com/#tienda">
-    <button>Volver a la tienda</button>
-</a>
+
+            <a href="https://natnation-sneakers.onrender.com/#tienda">
+                <button>Volver a la tienda</button>
+            </a>
         </div>
     </div>
     """
 
+
+# 👉 Validar cupón
 @app.route("/validar_cupon", methods=["POST"])
 def validar_cupon():
     correo = request.form["correo"]
     codigo = request.form["codigo"]
 
-    # validar código
     if codigo != "BIENVENIDO10":
         return "NO_EXISTE"
 
@@ -170,7 +173,6 @@ def validar_cupon():
 
     if resultado:
         if resultado[0] == 0:
-            conn.commit()
             mensaje = "OK"
         else:
             mensaje = "YA_USADO"
@@ -180,6 +182,7 @@ def validar_cupon():
     conn.close()
     return mensaje
 
+
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=10000)
-
+  
