@@ -311,3 +311,40 @@ function irAPagar() {
 
     window.open(url, "_blank");
 }
+
+function aplicarCupon() {
+
+    let codigo = document.getElementById("cupon").value.trim().toUpperCase();
+    let total = parseFloat(document.getElementById("total-precio").innerText);
+
+    // ❌ si ya lo usó
+    if (localStorage.getItem("cuponUsado")) {
+        alert("Ya usaste el cupón ❌");
+        return;
+    }
+
+    // ❌ si está vacío
+    if (codigo === "") {
+        alert("Ingresa un cupón ❌");
+        return;
+    }
+
+    // ❌ si no hay productos
+    if (!total || total === 0) {
+        alert("No hay productos en el carrito ❌");
+        return;
+    }
+
+    // ✅ cupón correcto
+    if (codigo === "BIENVENIDO10") {
+        let nuevoTotal = total * 0.9;
+
+        document.getElementById("total-precio").innerText = nuevoTotal.toFixed(2);
+
+        localStorage.setItem("cuponUsado", true);
+
+        alert("Cupón aplicado 🔥 10% OFF");
+    } else {
+        alert("Cupón inválido ❌");
+    }
+}
