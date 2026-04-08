@@ -532,3 +532,11 @@ button:hover {
     margin-top: 80px;
 }
 
+#user-icon {
+  position: relative;
+  z-index: 9999;
+}
+
+#inicio #user-icon {
+    display: none;
+}
