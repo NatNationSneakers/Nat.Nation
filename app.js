@@ -295,3 +295,19 @@ window.addEventListener("load", function () {
 function mostrarRegistro() {
     alert("Aquí puedes crear tu cuenta 🔥");
 }
+
+function irAPagar() {
+
+    let productos = document.getElementById("total-productos").innerText;
+    let total = document.getElementById("total-precio").innerText;
+
+    let mensaje = "Hola, quiero comprar:\n";
+    mensaje += "🛒 Productos: " + productos + "\n";
+    mensaje += "💰 Total: $" + total;
+
+    let numero = "525624570336"; // 🔥 TU NÚMERO (con lada MX)
+
+    let url = "https://wa.me/" + numero + "?text=" + encodeURIComponent(mensaje);
+
+    window.open(url, "_blank");
+}
