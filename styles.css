@@ -405,7 +405,7 @@ button:hover {
     width: 260px;
     margin: 30px auto;
     text-align: center;
-    color: white;
+    color: rgb(8, 8, 8);
 }
 
 .registro h3 {

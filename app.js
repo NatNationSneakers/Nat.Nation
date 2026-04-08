@@ -206,3 +206,24 @@ function toggleRegistro() {
     let panel = document.getElementById("registro");
     panel.classList.toggle("abierto");
 }
+
+function abrirPromo() {
+    window.location.href = "http://127.0.0.1:5010/descuento";
+}
+
+function aplicarCupon() {
+  let codigo = document.getElementById("cupon").value;
+  let totalElemento = document.getElementById("total-precio");
+
+  let total = parseFloat(totalElemento.innerText);
+
+  if (codigo === "BIENVENIDO5") {
+    let nuevoTotal = total * 0.95;
+
+    totalElemento.innerText = nuevoTotal.toFixed(2);
+
+    alert("🎉 Descuento aplicado!");
+  } else {
+    alert("❌ Cupón inválido");
+  }
+}
