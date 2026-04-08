@@ -208,7 +208,7 @@ function toggleRegistro() {
 }
 
 function abrirPromo() {
-    window.location.href = "http://127.0.0.1:5010/descuento";
+    window.location.href = "http://127.0.0.1:5011/descuento";
 }
 
 function aplicarCupon() {
@@ -217,8 +217,8 @@ function aplicarCupon() {
 
   let total = parseFloat(totalElemento.innerText);
 
-  if (codigo === "BIENVENIDO5") {
-    let nuevoTotal = total * 0.95;
+  if (codigo === "BIENVENIDO10") {
+    let nuevoTotal = total * 0.90;
 
     totalElemento.innerText = nuevoTotal.toFixed(2);
 
