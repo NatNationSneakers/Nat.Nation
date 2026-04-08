@@ -203,8 +203,8 @@ button:hover {
     position: fixed;
     top: 20px;
     right: 20px;
-    background: #ff2e8b;
-    color: rgb(7, 7, 7);
+    background: #090909;
+    color: rgb(253, 252, 252);
     border: none;
     padding: 18px 25px;
     font-size: 20px;
@@ -215,18 +215,18 @@ button:hover {
 
 #panel-carrito {
     position: fixed;
-    top: 0;
+    top: 0 ;
     right: -350px; /* oculto */
     width: 300px;
-    height: 100vh;
-    background: #f2f1f1;
+    height: 74vh ;
+    background: #fefdfe;
     color: rgb(8, 8, 8);
     padding: 20px;
-    padding-top: 80px;
     transition: right 0.4s ease;
-    z-index: 2000;
+    z-index: 99999;
     overflow-y: auto;
-    box-sizing: border-box;
+
+   
 }
 
 #panel-carrito.abierto {
@@ -387,4 +387,155 @@ button:hover {
     margin-left: auto;
     margin-right: auto;
     border-radius: 10px;
+}
+
+#promoBanner {
+    transition: opacity 0.13s ease;
+}
+
+.oculto {
+    opacity: 0;
+}
+
+/* 🔥 REGISTRO */
+.registro {
+    background: black;
+    padding: 20px;
+    border-radius: 10px;
+    width: 260px;
+    margin: 30px auto;
+    text-align: center;
+    color: white;
+}
+
+.registro h3 {
+    margin-bottom: 10px;
+}
+
+.registro input {
+    width: 90%;
+    margin: 5px;
+    padding: 8px;
+    border-radius: 5px;
+    border: none;
+}
+
+.registro button {
+    margin-top: 10px;
+    padding: 10px;
+    background: #ff007f; /* fucsia */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.registro button:hover {
+    background: #ff1493;
+}
+#user-icon {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: #ff1493;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+   
+#iconos-top {
+    position: absolute;
+    top: 20px;
+    right: 45px;
+
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+#iconos-top {
+    transform: translateY(-25);
+}
+
+#btn-carrito {
+    position: relative;
+    z-index: 2;
+}
+
+#user-icon {
+    position: relative;
+    z-index: 1;
+    transform: translateY(25px);
+}
+
+
+#panel-user {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+
+    background: #111;
+    padding: 30px;
+    border-radius: 15px;
+    width: 300px;
+
+    z-index: 9999;
+    color: white;
+
+    transition: 0.3s;
+}
+
+/* cuando se abre */
+#panel-user.activo {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.panel-login {
+    position: fixed;
+    top: 0;
+    right: -320px; /* escondido */
+    width: 300px;
+    height: 100%;
+    background: #111;
+    padding: 20px;
+    transition: 0.3s;
+    z-index: 1000;
+}
+
+/* cuando se abre */
+.panel-login.abierto {
+    right: 0;
+}
+
+.btn-cerrar {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    margin-bottom: 35px;
+}
+
+.panel-login {
+    padding-top: 80px;
+}
+
+.btn-cerrar {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+}
+
+#panel-carrito h2 {
+    margin-top: 80px;
+}
+
+#tienda {
+    display: none;
+}
+
+#registro {
+    display: none;
 }

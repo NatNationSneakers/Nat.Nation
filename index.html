@@ -7,7 +7,7 @@
 </head>
 <body>
    
-<div class="promo-banner" onclick="abrirPromo()">
+<div id="promoBanner" class="promo-banner" onclick="abrirPromo()">
   🎁 Obtén 5% en tu primera compra con BIENVENIDO5 (click aquí)
 </div>
 
@@ -17,16 +17,30 @@
 
 <div id="contenido">
 
+
 <!-- 🔥 PANTALLA 1 (INICIO) -->
 <div id="inicio">
     <img src="logo.png" class="logo-loader">
     <h1>Nat Nation</h1>
     <p>ENERGÍA · CONFORT · ESTILO</p>
     <button onclick="entrar()">Entrar</button>
+    <div id="user-icon" onclick="toggleRegistro()">👤</div>
 </div>
+
+<div  id="registro" class="panel-login ">
+    <button onclick="toggleRegistro()" class="btn-cerrar">⬅ Regresar</button>
+  <h3>Crear cuenta</h3>
+
+  <input type="email" id="email" placeholder="Correo"><br>
+  <input type="password" id="password" placeholder="Contraseña"><br>
+
+  <button onclick="registrar()">Registrarse</button>
+</div>
+
 
 <!-- 🔥 PANTALLA 2 (TIENDA) -->
 <div id="tienda">
+</div>
 
 <div id="panel-carrito">
     <button onclick="toggleCarrito()" class="btn-cerrar">
@@ -56,15 +70,14 @@
         <h1>Bienvenido a Nat Nation</h1>
     </header>
 
-   <button id="btn-carrito" onclick="toggleCarrito()">
+   <div id="iconos-top">
+    <div id="user-icon" onclick="toggleRegistro()">👤</div>
+    <button id="btn-carrito" onclick="toggleCarrito()">
+        🛍️ <span id="contador">0</span>
+    </button>
 
-<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="black">
-  <path d="M6 7V6a6 6 0 1 1 12 0v1h2a1 1 0 0 1 1 1l-1 12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2L3 8a1 1 0 0 1 1-1h2zm2 0h8V6a4 4 0 1 0-8 0v1z"/>
-</svg>
-
-<span id="contador">0</span>
-
-</button>
+</div>
+    
 
     <section class="productos">
 
@@ -118,6 +131,18 @@
 
 </div>
 
+<div id="panel-user">
+
+    <button onclick="toggleUser()">✖</button>
+
+    <h2>Tu cuenta</h2>
+
+    <input type="email" placeholder="Correo"><br>
+    <input type="password" placeholder="Contraseña"><br>
+
+    <button onclick="registrar()">Entrar</button>
+
+</div>
 
 <script src="app.js"></script>
 

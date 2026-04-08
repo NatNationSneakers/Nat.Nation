@@ -133,3 +133,76 @@ function irAPagar() {
     window.open(url, "_blank");
 }
 
+function animarBanner() {
+    let banner = document.getElementById("promoBanner");
+
+    // esperar antes de ocultar
+    setTimeout(() => {
+
+        setInterval(() => {
+
+            // ocultar
+            banner.classList.add("oculto");
+
+            // mostrar después de 10s
+            setTimeout(() => {
+                banner.classList.remove("oculto");
+            }, 10000);
+
+        }, 20000); // ciclo completo
+
+    }, 8000); // 🔥 tiempo visible al inicio (8 segundos)
+}
+
+window.addEventListener("load", function () {
+    animarBanner();
+});
+
+function registrar() {
+    let email = document.getElementById("email").value;
+    let password = document.getElementById("password").value;
+
+    if (!email || !password) {
+        alert("Completa todos los campos");
+        return;
+    }
+
+    fetch("http://127.0.0.1:5002/registro", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            email: email,
+            password: password
+        })
+    })
+    .then(res => res.json())
+    .then(data => {
+        alert("Cuenta creada 🎉");
+    })
+    .catch(error => {
+        console.error("Error:", error);
+        alert("Error al registrar");
+    });
+}
+
+function toggleRegistro() {
+    const reg = document.getElementById("registro");
+
+    if (reg.style.display === "none" || reg.style.display === "") {
+        reg.style.display = "block";
+    } else {
+        reg.style.display = "none";
+    }
+}
+
+function toggleUser() {
+    const panel = document.getElementById("panel-user");
+    panel.classList.toggle("activo");
+}
+
+function toggleRegistro() {
+    let panel = document.getElementById("registro");
+    panel.classList.toggle("abierto");
+}
