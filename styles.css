@@ -565,10 +565,8 @@ button:hover {
     left: 0;
     width: 100%;
     height: 100%;
-
     background: white;
     color: black;
-
     display: none;
     justify-content: center;
     align-items: center;
@@ -689,8 +687,7 @@ button:hover {
     cursor: pointer;
     font-weight: bold;
     display:block;
-    margin-left: auto;
-    nav-right: auto;
+   
 }
 
 .btn-crear:hover {
@@ -707,6 +704,7 @@ button:hover {
 .login-contenido button {
     width: 100%;
     max-width: 300px;
+    margin: 10px auto;
 }
 .login-contenido p {
     text-align: center;
@@ -714,4 +712,29 @@ button:hover {
 .btn-crear {
     display: block;
     margin: 15px auto;
+}
+
+.login-contenido input {
+    width: 300px;
+    margin: 10px auto;
+    display: block;
+}
+
+#login-full {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    background: white;
+
+    opacity: 0;
+    pointer-events: none;
+    transition: 0.3s;
+}
+
+#login-full.activo {
+    opacity: 1;
+    pointer-events: auto;
 }
