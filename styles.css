@@ -864,17 +864,64 @@ button:hover {
     z-index: 9999;
 }
 
-#carrito {
+#carrito, #usuarioPanel {
     position: fixed;
-    right: 0;
     top: 0;
-    width: 300px;
+    right: 0;
+    width: 85%; /* mejor para celular */
+    max-width: 350px;
     height: 100%;
     background: white;
+    z-index: 9999;
+
     transform: translateX(100%);
     transition: transform 0.3s ease;
 }
 
-#carrito.activo {
+/* cuando se abre */
+#carrito.activo, #usuarioPanel.activo {
     transform: translateX(0);
+}
+
+body {
+    overflow-x: hidden;
+}
+
+#fondo {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    background: rgba(0,0,0,0.5);
+    display: none;
+    z-index: 9998;
+}
+
+#fondo.activo {
+    display: block;
+}
+
+/* 🔥 PANEL CARRITO (FIX ANDROID) */
+#panel-carrito {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 85%;
+    max-width: 350px;
+    height: 100%;
+    background: white;
+    z-index: 9999;
+
+    transform: translateX(120%); /* 👈 clave */
+    transition: transform 0.3s ease;
+}
+
+/* cuando abre */
+#panel-carrito.abierto {
+    transform: translateX(0);
+}
+body {
+    overflow-x: hidden;
 }
