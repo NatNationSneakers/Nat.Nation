@@ -109,10 +109,10 @@ function Agregar(boton) {
 }
 
 function irAPagar() {
-  let correo = localStorage.getItem("correo");
+  let sesion = JSON.parse(localStorage.getItem("sesion"));
   let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 
-  if (!correo) {
+  if (!sesion) {
     alert("Primero regístrate");
     return;
   }
