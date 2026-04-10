@@ -963,3 +963,28 @@ body {
 html, body {
     overflow-x: hidden;
 }
+
+/* 🔥 SOLUCIÓN DEFINITIVA (OCULTAR DE VERDAD) */
+
+#panel-carrito,
+#panel-user {
+    position: fixed !important;
+    top: 0;
+    right: 0;
+    width: 85vw;
+    max-width: 350px;
+    height: 100vh;
+
+    z-index: 9999;
+
+    /* 👇 ESTO ES LO QUE LO ARREGLA */
+    transform: translateX(100vw) !important;
+    visibility: hidden;
+}
+
+/* 👇 SOLO CUANDO SE ABRE */
+#panel-carrito.abierto,
+#panel-user.activo {
+    transform: translateX(0) !important;
+    visibility: visible;
+}

@@ -89,6 +89,11 @@ function eliminar(index) {
 
 function toggleCarrito() {
     let panel = document.getElementById("panel-carrito");
+    let user = document.getElementById("panel-user");
+
+    // 🔥 cerrar usuario si está abierto
+    user.classList.remove("activo");
+
     panel.classList.toggle("abierto");
 }
 
@@ -150,16 +155,18 @@ function animarBanner() {
 
 function toggleUser() {
     const panel = document.getElementById("panel-user");
+    let carrito = document.getElementById("panel-carrito");
+
+    // 🔥 cerrar carrito si está abierto
+    carrito.classList.remove("abierto");
 
     let sesion = JSON.parse(localStorage.getItem("sesion"));
 
-    // Si está abierto → cerrar
     if (panel.classList.contains("activo")) {
         panel.classList.remove("activo");
         return;
     }
 
-    // Si está cerrado → cargar contenido
     if (sesion) {
         panel.innerHTML = `
             <button class="btn-cerrar" onclick="cerrarPanelUsuario()">✖</button>
