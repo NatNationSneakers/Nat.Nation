@@ -275,3 +275,7 @@ window.addEventListener("load", function () {
     }, 500);
 
 });
+
+function cerrarCarrito() {
+    document.getElementById("carrito").classList.remove("activo");
+}
