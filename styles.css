@@ -925,3 +925,41 @@ body {
 body {
     overflow-x: hidden;
 }
+
+#panel-carrito,
+#panel-user {
+    right: -100%; /* 👈 esto es la clave */
+}
+
+#panel-carrito.abierto {
+    right: 0;
+}
+
+#panel-user.activo {
+    right: 0;
+}
+
+/* 🔥 FIX DEFINITIVO ANDROID (NO BORRAR LO DEMÁS) */
+#panel-carrito,
+#panel-user {
+    position: fixed !important;
+    top: 0;
+    right: 0;
+    width: 85vw;
+    max-width: 350px;
+    height: 100vh;
+
+    transform: translateX(120vw);
+    transition: transform 0.3s ease;
+}
+
+/* cuando se abren */
+#panel-carrito.abierto,
+#panel-user.activo {
+    transform: translateX(0);
+}
+
+/* evita scroll lateral raro */
+html, body {
+    overflow-x: hidden;
+}
