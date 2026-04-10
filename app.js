@@ -146,26 +146,55 @@ function animarBanner() {
     }, 8000);
 }
 
-window.addEventListener("load", function () {
-    animarBanner();
-
-    let sesion = JSON.parse(localStorage.getItem("sesion"));
-    if (sesion) {
-        mostrarUsuario(sesion.correo);
-    }
-});
+// ================== CONTROL PANEL ==================
 
 function toggleUser() {
     const panel = document.getElementById("panel-user");
-    panel.classList.toggle("activo");
+
+    let sesion = JSON.parse(localStorage.getItem("sesion"));
+
+    // Si está abierto → cerrar
+    if (panel.classList.contains("activo")) {
+        panel.classList.remove("activo");
+        return;
+    }
+
+    // Si está cerrado → cargar contenido
+    if (sesion) {
+        panel.innerHTML = `
+            <button class="btn-cerrar" onclick="cerrarPanelUsuario()">✖</button>
+            <h2>Tu cuenta</h2>
+            <h3>👤 Bienvenido</h3>
+            <p>${sesion.correo}</p>
+            <button onclick="irACarrito()">🛒 Ver carrito</button>
+            <button onclick="cerrarSesion()">Cerrar sesión</button>
+        `;
+    } else {
+        panel.innerHTML = `
+            <button class="btn-cerrar" onclick="cerrarPanelUsuario()">✖</button>
+            <h2>Tu cuenta</h2>
+            <button onclick="abrirLoginFull()">Iniciar sesión</button>
+        `;
+    }
+
+    panel.classList.add("activo");
 }
 
-function abrirPromo() {
-   window.location.href = "http://127.0.0.1:5016/descuento";
+function cerrarPanelUsuario() {
+    document.getElementById("panel-user").classList.remove("activo");
 }
 
 
-// 🔥 LOGIN
+// ================== LOGIN ==================
+
+function abrirLoginFull() {
+    document.getElementById("login-full").classList.add("activo");
+}
+
+function cerrarLoginFull() {
+    document.getElementById("login-full").classList.remove("activo");
+}
+
 function iniciarSesion() {
     let correo = document.getElementById("correoLogin").value.trim();
     let password = document.getElementById("passLogin").value.trim();
@@ -183,17 +212,17 @@ function iniciarSesion() {
         localStorage.setItem("sesion", JSON.stringify(usuario));
         alert("✅ Bienvenido");
         cerrarLoginFull();
-        mostrarUsuario(usuario.correo);
     } else {
         alert("❌ Datos incorrectos");
     }
 }
 
 
-// 🔥 REGISTRO
+// ================== REGISTRO ==================
+
 function registrarUsuario() {
-    let correo = document.querySelector("#registro #correoRegistro")?.value.trim();
-    let password = document.querySelector("#registro #passRegistro")?.value.trim();
+    let correo = document.getElementById("correoRegistro").value.trim();
+    let password = document.getElementById("passRegistro").value.trim();
 
     if (!correo || !password) {
         alert("⚠️ Llena todos los campos");
@@ -205,81 +234,44 @@ function registrarUsuario() {
     let existe = usuarios.find(u => u.correo === correo);
 
     if (existe) {
-        alert("⚠️ Ese correo ya está registrado");
+        alert("⚠️ Ese correo ya existe");
         return;
     }
 
     usuarios.push({ correo, password });
+
     localStorage.setItem("usuarios", JSON.stringify(usuarios));
     localStorage.setItem("sesion", JSON.stringify({ correo }));
 
     alert("✅ Cuenta creada");
 
     cerrarLoginFull();
-    mostrarUsuario(correo);
 }
 
 
-// UI LOGIN
+// ================== UI ==================
+
 function mostrarRegistro() {
     document.getElementById("registro").style.display = "block";
-
-    document.getElementById("correoLogin").style.display = "none";
-    document.getElementById("passLogin").style.display = "none";
-    document.querySelector(".btn-continuar").style.display = "none";
-    document.querySelector(".btn-crear").style.display = "none";
 }
 
-function volverLogin() {
-    document.getElementById("registro").style.display = "none";
 
-    document.getElementById("correoLogin").style.display = "block";
-    document.getElementById("passLogin").style.display = "block";
-    document.querySelector(".btn-continuar").style.display = "block";
-    document.querySelector(".btn-crear").style.display = "block";
-}
-
-function abrirLoginFull() {
-    document.getElementById("login-full").classList.add("activo");
-    volverLogin();
-}
-
-function cerrarLoginFull() {
-    document.getElementById("login-full").classList.remove("activo");
-    volverLogin();
-}
-
-function mostrarUsuario(correo) {
-    let panel = document.getElementById("panel-user");
-
-    panel.innerHTML = `
-        <h3>👤 Bienvenido</h3>
-        <p>${correo}</p>
-        <button onclick="cerrarSesion()">Cerrar sesión</button>
-    `;
-
-    panel.classList.add("activo");
-}
+// ================== SESIÓN ==================
 
 function cerrarSesion() {
     localStorage.removeItem("sesion");
     location.reload();
 }
 
+
+// ================== LOAD (SIN ERRORES) ==================
+
 window.addEventListener("load", function () {
 
-    // 🔥 QUITAR LOADER
+    // 🔥 Esto evita que se quede congelado el loader
     setTimeout(() => {
-        document.getElementById("loader").classList.add("oculto");
-        document.getElementById("contenido").classList.add("visible");
-    }, 800);
+        document.getElementById("loader")?.classList.add("oculto");
+        document.getElementById("contenido")?.classList.add("visible");
+    }, 500);
 
-    // 🔥 SESIÓN
-    let sesion = JSON.parse(localStorage.getItem("sesion"));
-    if (sesion) {
-        mostrarUsuario(sesion.correo);
-    }
-
-    // 🔥 BANNER
-    animarBanner();
 });

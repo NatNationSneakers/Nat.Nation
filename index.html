@@ -19,26 +19,23 @@
 
 <div id="contenido">
 
-
 <!-- 🔥 PANTALLA 1 (INICIO) -->
 <div id="inicio">
     <img src="logo.png" class="logo-loader">
     <h1>Nat Nation</h1>
     <p>ENERGÍA · CONFORT · ESTILO</p>
     <button onclick="entrar()">Entrar</button>
-    <div id="user-icon" onclick="abrirLoginFull()">👤</div>
+     <div id="user-icon" onclick="abrirLoginFull()">👤</div>
 </div>
-
 
 <!-- 🔥 PANTALLA 2 (TIENDA) -->
 <div id="tienda">
-
 <div id="panel-carrito">
     <button onclick="toggleCarrito()" class="btn-cerrar">
     ⬅️ Regresar
 </button>
 
-    <h2> 🛒 Tu carrito</h2>
+    <h2> Tu carrito</h2>
     <ul id="lista-carrito"></ul>
     <div id="resumen">
 
@@ -122,78 +119,55 @@
 
 </div>
 
-<!-- FONDO OSCURO -->
-<div id="overlay" onclick="toggleUser()"></div>
-
-<!-- PANEL USUARIO -->
-<div id="panel-user">
-
-  <button class="btn-cerrar" onclick="toggleUser()">X</button>
-
-  <h2>Tu cuenta</h2>
-
-<!-- 🔥 AQUI VA EXACTO -->
-<div class="social-login">
-    <button class="social-btn fb">📘</button>
-    <button class="social-btn apple"></button>
-    <button class="social-btn google">🌐</button>
-</div>
 
 
-</div>
+<!-- BOTÓN USUARIO (ARRIBA DERECHA) -->
+<div id="user-icon" onclick="toggleUser()">👤</div>
 
-</script>
 
+<!-- PANEL DESLIZABLE -->
+<div id="panel-user"></div>
 
+<!-- LOGIN FULL (PANTALLA COMPLETA) -->
 <div id="login-full">
 
     <button onclick="cerrarLoginFull()" class="cerrar-login">✖</button>
 
-   <div class="login-contenido">
-    <h1>Inicia sesión o regístrate</h1>
+    <div class="login-contenido">
+        <h1>Inicia sesión o regístrate</h1>
 
-    <!-- 🔥 AQUÍ VA -->
-    <div class="social-login">
-    <button class="social-btn fb">
-    <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png">
-</button>
+        <div class="social-login">
+            <button class="social-btn fb">
+                <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png">
+            </button>
 
-<button class="social-btn apple">
-    <img src="https://cdn-icons-png.flaticon.com/512/0/747.png">
-</button>
+            <button class="social-btn apple">
+                <img src="https://cdn-icons-png.flaticon.com/512/0/747.png">
+            </button>
 
-<button class="social-btn">
-    <img src="https://cdn-icons-png.flaticon.com/512/300/300221.png">
-</button>
-</div>
+            <button class="social-btn">
+                <img src="https://cdn-icons-png.flaticon.com/512/300/300221.png">
+            </button>
+        </div>
 
-    <input type="email" id="correoLogin" placeholder="Correo electrónico">
-    <input type="password" id="passLogin" placeholder="Contraseña">
-   <button class="btn-continuar" onclick="iniciarSesion()">CONTINUAR →</button>
+        <input type="email" id="correoLogin" placeholder="Correo electrónico">
+        <input type="password" id="passLogin" placeholder="Contraseña">
 
+        <button class="btn-continuar" onclick="iniciarSesion()">CONTINUAR →</button>
 
+        <p>¿No tienes cuenta?</p>
 
-    <p class="crear-cuebta-texto;">¿No tienes cuenta?</p>
-<button class="btn-crear" onclick="mostrarRegistro()">
-    Crear cuenta
-</button>
+        <button onclick="mostrarRegistro()">Crear cuenta</button>
 
-<div id="registro" style="display:none;">
-    
+        <div id="registro" style="display:none;">
+            <h2>Crear cuenta</h2>
 
-    <h2>Crear cuenta</h2>
+            <input type="email" id="correoRegistro" placeholder="Correo">
+            <input type="password" id="passRegistro" placeholder="Contraseña">
 
-    <input type="email" id="correoRegistro" placeholder="Correo">
-    <input type="password" id="passRegistro" placeholder="Contraseña">
-
-    <button type="button" onclick="registrarUsuario()">Registrarse</button>
-</div>
-
-
-</div>
+            <button onclick="registrarUsuario()">Registrarse</button>
+        </div>
+    </div>
 </div>
 
 <script src="app.js"></script>
-
-</body>
-</html>    
