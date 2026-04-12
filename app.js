@@ -286,3 +286,25 @@ window.addEventListener("load", function () {
 function cerrarCarrito() {
     document.getElementById("carrito").classList.remove("activo");
 }
+
+function abrirPromo() {
+    window.location.href = "http://127.0.0.1:5016/descuento";
+}
+
+function aplicarCupon() {
+    let codigo = document.getElementById("cupon").value.trim();
+    let totalElemento = document.getElementById("total-precio");
+
+    let total = parseFloat(totalElemento.innerText);
+
+    if (codigo === "BIENVENIDO10") {
+        let descuento = total * 0.10;
+        let nuevoTotal = total - descuento;
+
+        totalElemento.innerText = nuevoTotal.toFixed(2);
+
+        alert("✅ Cupón aplicado: 10% de descuento");
+    } else {
+        alert("❌ Cupón inválido");
+    }
+}
