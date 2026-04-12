@@ -1033,3 +1033,23 @@ html, body {
     opacity: 0.7;
     font-style: italic;
 }
+
+#panel-carrito {
+    position: fixed;
+    top: 0;
+    right: 0;
+
+    width: 100%;
+    max-width: 400px;
+    height: 100vh;
+
+    background: white;
+    z-index: 9999;
+
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    -webkit-overflow-scrolling: touch;
+
+    padding-bottom: 120px;
+}
