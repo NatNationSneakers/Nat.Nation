@@ -173,7 +173,6 @@ function toggleUser() {
             <h2>Tu cuenta</h2>
             <h3>👤 Bienvenido</h3>
             <p>${sesion.correo}</p>
-            <button onclick="irACarrito()">🛒 Ver carrito</button>
             <button onclick="cerrarSesion()">Cerrar sesión</button>
         `;
     } else {
