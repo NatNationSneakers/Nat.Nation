@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>En mantenimiento</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: black;
+      color: white;
+      font-family: Arial;
+    }
+    h1 {
+      font-size: 2rem;
+    }
+  </style>
+</head>
+<body>
+  <h1>🚧 Sitio en mantenimiento 🚧</h1>
+</body>
+</html>
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Nat Nation Sneaker ! Tienda de Tenis en México</title>
+    <meta name="description" content="Comptra tenis como Nike, Adidas, Puma entre otros en Nat.Nation Sneakers">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+</head>
+<body>
+   
+<div id="promoBanner" class="promo-banner" onclick="abrirPromo()">
+  <div class="linea1">🎁 Obtén 10% en tu primera compra (click aqui)</div>
+  <div class="linea2">(Por el momento el link solo abre en computadora)</div>
+</div>
+
+<div id="loader">
+    <img src="logo.png" class="logo-loader">
+</div>
+
+<div id="contenido">
+
+<!-- 🔥 PANTALLA 1 (INICIO) -->
+<div id="inicio">
+    <img src="logo.png" class="logo-loader">
+    <h1>Nat Nation</h1>
+    <p>ENERGÍA · CONFORT · ESTILO</p>
+    <button onclick="entrar()">Entrar</button>
+     <div id="user-icon" onclick="abrirLoginFull()">👤</div>
+</div>
+
+<!-- 🔥 PANTALLA 2 (TIENDA) -->
+<div id="tienda">
+<div id="panel-carrito">
+    <button onclick="toggleCarrito()" class="btn-cerrar">
+    ⬅️ Regresar
+</button>
+
+    <h2> Tu carrito</h2>
+    <ul id="lista-carrito"></ul>
+    <div id="resumen">
+
+  <h3>RESUMEN DEL PEDIDO</h3>
+
+  <p>Productos: <span id="total-productos">0</span></p>
+  <p>Total: $<span id="total-precio">0</span></p>
+
+  <input type="text" id="cupon" placeholder="Código promocional">
+  <button onclick="aplicarCupon()">Aplicar</button>
+
+  <button onclick="irAPagar()">Ir a pagar →</button>
+
+</div>
+</div>
+
+<button class="btn-regresar" onclick="regresar()">⬅ Regresar</button>
+
+    <header>
+        <h1>Bienvenido a Nat Nation</h1>
+    </header>
+
+   <div id="iconos-top">
+    <div id="user-icon" onclick="abrirLoginFull()">👤</div>
+    <button id="btn-carrito" onclick="toggleCarrito()">
+        🛍️ <span id="contador">0</span>
+    </button>
+
+</div>
+    
+
+    <section class="productos">
+
+        <div class="producto">
+            <img src="Campus Blanco.jpg">
+            <h2>Nike Campus Blanco</h2>
+            <p>$350</p>
+            <select>
+  <option>MX 25.5</option>
+  <option>MX 26</option>
+  <option>MX 26.5</option>
+  <option>MX 27</option>
+  <option>MX 27.5</option>
+  <option>MX 28.5</option>
+</select>
+
+<button onclick="Agregar(this)">Añadir al carrito</button>
+
+  </div>
+
+        <div class="producto">
+            <img src="Suede XL Scudetria Ferrari.jpg">
+            <h2>Nike Suede XL Scuderia Ferrari</h2>
+            <p>$370</p>
+            <select>
+  <option>MX 23.5</option>
+  <option>MX 24</option>
+  <option>MX 24.5</option>
+  <option>MX 25</option>
+  <option>MX 25.5</option>
+  <option>MX 26</option>
+</select>
+
+<button onclick="Agregar(this)">Añadir al carrito</button>
+
+  </div>
+
+        <div class="producto">
+            <img src="Suede XL Blanco.jpg">
+            <h2>Nike Suede XL Blanco</h2>
+            <p>$370</p>
+            <select>
+  <option>MX 23.5</option>
+  <option>MX 24</option>
+  <option>MX 24.5</option>
+  <option>MX 25</option>
+  <option>MX 25.5</option>
+  <option>MX 26</option>
+</select>
+
+<button onclick="Agregar(this)">Añadir al carrito</button>
+
+  </div>
+
+        <div class="producto">
+            <img src="Airforceblanco.png">
+            <h2>Nike Air Force Blanco</h2>
+            <p>$250</p>
+            <select>
+  <option>MX 23.5</option>
+  <option>MX 24</option>
+  <option>MX 24.5</option>
+  <option>MX 25</option>
+  <option>MX 25.5</option>
+  <option>MX 26</option>
+</select>
+
+<button onclick="Agregar(this)">Añadir al carrito</button>
+            
+        </div>
+
+        <div class="producto">
+            <img src="Airforceblanco.png">
+            <h2>Nike Air Force Blanco Niñ@</h2>
+            <p>$250</p>
+            <select>
+  <option>MX 18.5</option>
+  <option>MX 19</option>
+  <option>MX 19.5</option>
+  <option>MX 20</option>
+  <option>MX 20.5</option>
+  <option>MX 21</option>
+</select>
+
+<button onclick="Agregar(this)">Añadir al carrito</button>
+        </div>
+
+        <div class="producto">
+            <img src="DCNEGRO.jpg">
+            <h2>DC Court Graffik SE</h2>
+            <p>$350</p>
+            <select>
+  <option>MX 23</option>
+  <option>MX 23.5</option>
+  <option>MX 24</option>
+  <option>MX 24.5</option>
+  <option>MX 25</option>
+</select>
+
+<button onclick="Agregar(this)">Añadir al carrito</button>
+        </div>
+
+    </section>
+
+</div>
+
+
+
+<!-- BOTÓN USUARIO (ARRIBA DERECHA) -->
+<div id="user-icon" onclick="toggleUser()">👤</div>
+
+
+<!-- PANEL DESLIZABLE -->
+<div id="panel-user"></div>
+
+<!-- LOGIN FULL (PANTALLA COMPLETA) -->
+<div id="login-full">
+
+    <button onclick="cerrarLoginFull()" class="cerrar-login">✖</button>
+
+    <div class="login-contenido">
+        <h1>Inicia sesión o regístrate</h1>
+
+        <div class="social-login">
+            <button class="social-btn fb">
+                <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png">
+            </button>
+
+            <button class="social-btn apple">
+                <img src="https://cdn-icons-png.flaticon.com/512/0/747.png">
+            </button>
+
+            <button class="social-btn">
+                <img src="https://cdn-icons-png.flaticon.com/512/300/300221.png">
+            </button>
+        </div>
+
+        <input type="email" id="correoLogin" placeholder="Correo electrónico">
+        <input type="password" id="passLogin" placeholder="Contraseña">
+
+        <button class="btn-continuar" onclick="iniciarSesion()">CONTINUAR →</button>
+
+        <p>¿No tienes cuenta?</p>
+
+        <button onclick="mostrarRegistro()">Crear cuenta</button>
+
+        <div id="registro" style="display:none;">
+            <h2>Crear cuenta</h2>
+
+            <input type="email" id="correoRegistro" placeholder="Correo">
+            <input type="password" id="passRegistro" placeholder="Contraseña">
+
+            <button onclick="registrarUsuario()">Registrarse</button>
+        </div>
+
+    </div>
+</div>
+
+<script src="app.js"></script>
